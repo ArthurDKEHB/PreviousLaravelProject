@@ -43,6 +43,10 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/editUser', function () {
+    return view('editUser');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -55,8 +59,12 @@ Route::post('/posts', 'PostController@store');
 Route::get('/posts/create', 'PostController@create');
 Route::get('/posts/{post}', 'PostController@show');
 Route::get('/posts/{post}/edit', 'PostController@edit');
+// Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('admin');
 Route::put('/posts/{post}', 'PostController@update');
-Route::put('/posts/{post}/destroy', 'PostController@destroy');
+Route::delete('/posts/{post}/destroy', 'PostController@destroy');
+
+
+Route::get('/editUser', 'UserController@index')->middleware('admin');
 
 
 

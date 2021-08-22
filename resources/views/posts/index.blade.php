@@ -20,22 +20,21 @@
 				<li><a href="posts/{{ $post->id }}" class="button alt">See full post</a></li>
 			</ul>
 			@auth
-			@if(Auth::user()->id == $post->user_id)
+			@if(Auth::user()->id == $post->user_id || Auth::user()->is_admin)
 			<a href="posts/{{ $post->id }}/edit" class="button alt">Edit</a>
-
-			<!-- <form method="POST" action="{{ url('/posts') }}/{{ $post->id }}">
+		</br>
+		<p>
+			<form method="POST" action="{{ action('PostController@destroy', $post->id) }}">
 				@method('DELETE')
 						<button class="button is-link" type="submit">Delete</button>
-
-			</form> -->
-
+						
+				@csrf
+			</form> 
+		</p>
 			@endif
 			@endif
 		</div>
 	</section>
 	@endforeach
-
-
-
 
 	@endsection

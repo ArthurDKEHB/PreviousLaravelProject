@@ -9,6 +9,9 @@
             <a href="{{ url('/posts') }}" class="{{ Request::path() === 'posts' ? 'current_highlited_tab' : ''}}">Posts</a>
             @if (Route::has('login'))
             @auth
+            @if (Auth::user()->is_admin)
+            <a href="{{ url('/editUser') }}" class="{{ Request::path() === 'editUser' ? 'current_highlited_tab' : ''}}">Edit Users</a>
+            @endif
             <a href="{{ url('/posts/create') }}" class="{{ Request::path() === 'posts/create' ? 'current_highlited_tab' : ''}}">Create Post</a>
             <!-- <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a> -->
             <!-- <li class="#nav-item dropdown">

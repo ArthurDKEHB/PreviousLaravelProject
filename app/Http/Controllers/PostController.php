@@ -80,13 +80,15 @@ class PostController extends Controller
 
     }
 
-    public function destroy($post)
+    public function destroy($postId)
     {
-        if(Auth::user()->id != $post->user_id){
+        $post = Post::find($postId);
+        // ddd($post);
+        if(Auth::user()->id != $post->user_id && !Auth::user()->is_admin){
             abort(403);
         }
 
-        $post->delete;
+        $post->delete();
 
         return redirect('/posts');
     }
